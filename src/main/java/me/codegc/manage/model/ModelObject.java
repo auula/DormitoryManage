@@ -5,6 +5,10 @@ package me.codegc.manage.model;
  */
 public class ModelObject {
 	
+	@Override
+	public String toString() {
+		return "ModelObject [account=" + account + ", password=" + password + ", type_id=" + type_id + "]";
+	}
 	private String account;
 	
 	private String password;
