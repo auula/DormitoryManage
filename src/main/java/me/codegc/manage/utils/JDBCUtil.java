@@ -25,7 +25,7 @@ public class JDBCUtil {
 
     private Connection connection = null;
     
-    public static final String CONFIG = "src/main/resources/jdbc.properties";
+    public static final String CONFIG = new JDBCUtil().getClass().getClassLoader().getResource("jdbc.properties").getPath();;
 
     //initialize
     public JDBCUtil(String driver, String url, String username, String password) {

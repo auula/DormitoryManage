@@ -35,7 +35,7 @@ public class AdminDaoimplement implements AdminDao {
 		ResultSet rs = null;
 		Admin admin = null;
 		// 创建预编译
-		System.out.println(conn);
+		//System.out.println(conn);
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, account);

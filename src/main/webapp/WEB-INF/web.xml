@@ -32,6 +32,10 @@
     <url-pattern>/ErrorHandler</url-pattern>
   </servlet-mapping>
   <error-page>
+    <error-code>405</error-code>
+    <location>/ErrorHandler</location>
+  </error-page>
+  <error-page>
     <error-code>404</error-code>
     <location>/ErrorHandler</location>
   </error-page>
@@ -81,4 +85,23 @@
     <servlet-name>SystemMainController</servlet-name>
     <url-pattern>/system</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>用户登录请求地址</description>
+    <display-name>UserLogin</display-name>
+    <servlet-name>UserLogin</servlet-name>
+    <servlet-class>com.codegc.manage.api.UserLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserLogin</servlet-name>
+    <url-pattern>/login/form</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <display-name>AdminFilter</display-name>
+    <filter-name>AdminFilter</filter-name>
+    <filter-class>com.codegc.manage.filters.AdminFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AdminFilter</filter-name>
+    <url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
 </web-app>

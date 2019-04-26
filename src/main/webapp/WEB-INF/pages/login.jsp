@@ -63,12 +63,12 @@
 						</div>
 						<div class="pui-form-group">
 							<label style="font-size: 15px" class="type_form">身 份 :</label>
-							<pui-radio name="type_id" value="学生" class="checked">学生<input
+							<pui-radio name="type_id" value="0" class="checked">学生<input
 								type="radio" name="type_id" value="0" 
 								 ></pui-radio>
-							<pui-radio name="type_id" value="宿管">宿管<input
+							<pui-radio name="type_id" value="1">宿管<input
 								type="radio" name="type_id" value="1"></pui-radio>
-							<pui-radio name="type_id" value="管理员">系统管理员<input
+							<pui-radio name="type_id" value="2">系统管理员<input
 								type="radio" name="type_id" value="2"></pui-radio>
 						</div>
 						<div class="pui-form-group">
@@ -113,7 +113,7 @@
 		
 		/* 点击切换验证码 */
 		$("#vcode-img").click(function () {
-			console.log($("input[type='radio']:checked").val());
+			console.log();
 			$("#vcode-img").attr("src",'<%=basePath%>get/captcha?'+new Date().getTime());
 		});
 		
@@ -141,7 +141,8 @@
 			var data = {
 					account : $('#account').val(),
 					password : $('#password').val(),
-					vcode : $('#vcode').val()
+					vcode : $('#vcode').val(),
+					t_id: $("input[type='radio']:checked").val()
 			}
 			console.log(data)
 			$.post("<%=basePath%>login/form", data, function(result) {

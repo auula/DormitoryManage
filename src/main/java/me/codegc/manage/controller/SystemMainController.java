@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class SystemMainController
  */
 public class SystemMainController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -24,7 +25,7 @@ public class SystemMainController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("TYPE_ID", "0");
+		
 		request.getRequestDispatcher("/WEB-INF/pages/system/main.jsp").forward(request, response);
 	}
 

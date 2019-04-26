@@ -4,7 +4,7 @@
 <jsp:include page="${'../component/head.jsp'}"></jsp:include>
 <!-- 通过登录的用户id来区分用户的功能 -->
 <%
-	String id = (String)request.getAttribute("TYPE_ID");
+	String id = (String)request.getSession().getAttribute("TYPE_ID");
 	switch (id){
 		case "0":
 			
