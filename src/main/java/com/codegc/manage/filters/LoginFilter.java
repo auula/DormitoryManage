@@ -29,10 +29,10 @@ public class LoginFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 		//如果用户登陆了，session里面就存放者用户的登陆凭证 可能是false->没有登陆 true说明已经登陆
-		Object LOGIN_USER = request.getSession().getAttribute("LOGIN_USER");
+		boolean LOGIN_USER = (boolean)request.getSession().getAttribute("IS_LOGIN");
 		String path = request.getServletPath();
 		//对一些静态资源不拦截
-		if (LOGIN_USER == null && path.indexOf("/static/") < 0 && path.indexOf("/login/") < 0 && path.indexOf("/get/") < 0 && path.indexOf("index.html") < 0) {
+		if (LOGIN_USER && path.indexOf("/static/") < 0 && path.indexOf("/login/") < 0 && path.indexOf("/get/") < 0 && path.indexOf("index.html") < 0) {
 			response.sendRedirect(request.getContextPath());
 		}else{
 			chain.doFilter(request, response);
