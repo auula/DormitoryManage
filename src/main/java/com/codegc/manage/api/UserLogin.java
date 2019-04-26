@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import me.codegc.manage.enumeration.ActionStatus;
+import me.codegc.manage.enumeration.UserTypeID;
 import me.codegc.manage.model.Admin;
 import me.codegc.manage.model.JsonResult;
 import me.codegc.manage.service.LoginService;
@@ -36,7 +37,8 @@ public class UserLogin extends HttpServlet {
 		 Admin  admin  = new Admin(account,pwd,(byte)1);
 		if(new LoginService().Adminlogin(admin)) {
 			HttpSession session  = request.getSession();
-			session.setAttribute("TYPE_ID", "0");
+			session.setAttribute("TYPE_ID", UserTypeID.STUDENT.getTypeid());
+			session.setAttribute("LOGIN_USER",true);
 			JsonUtil.outJson(response, new JsonResult(ActionStatus.LOGIN_SUCCESSFUL.getCode(), ActionStatus.LOGIN_SUCCESSFUL.getMessage()));
 		}else {
 			JsonUtil.outJson(response, new JsonResult(ActionStatus.LOGIN_ERROR.getCode(), ActionStatus.LOGIN_ERROR.getMessage()));			

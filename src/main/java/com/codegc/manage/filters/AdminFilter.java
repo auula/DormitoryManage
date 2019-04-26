@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import me.codegc.manage.enumeration.ActionStatus;
+import me.codegc.manage.enumeration.UserTypeID;
 import me.codegc.manage.model.JsonResult;
 import me.codegc.manage.utils.JsonUtil;
 
@@ -39,11 +40,11 @@ public class AdminFilter implements Filter {
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
-		String TYPE_ID =(String)request.getSession().getAttribute("TYPE_ID");
+		Integer TYPE_ID =(Integer)request.getSession().getAttribute("TYPE_ID");
 		
 		if(TYPE_ID != null) {
-			System.out.println(TYPE_ID);
-			if(TYPE_ID.equals("2")) {
+			//System.out.println(TYPE_ID);
+			if(TYPE_ID == UserTypeID.ADMIN.getTypeid()) {
 				System.out.println("通过是管理员！");
 				chain.doFilter(request, response);
 			}else{
@@ -53,11 +54,13 @@ public class AdminFilter implements Filter {
 				return;
 			}
 		}else {
-			System.out.println(TYPE_ID);
-			response.setStatus(403);
-			//身份id没有或者null
-			JsonUtil.outJson(response, JsonResult.init(ActionStatus.IDENTITY_TYPE_ID_ERROR.getCode(), ActionStatus.IDENTITY_TYPE_ID_ERROR.getMessage()));
-			return;
+			
+			response.sendRedirect(request.getContextPath());
+//			System.out.println(TYPE_ID);
+//			response.setStatus(403);
+//			//身份id没有或者null
+//			JsonUtil.outJson(response, JsonResult.init(ActionStatus.IDENTITY_TYPE_ID_ERROR.getCode(), ActionStatus.IDENTITY_TYPE_ID_ERROR.getMessage()));
+//			return;
 		}
 		
 		
