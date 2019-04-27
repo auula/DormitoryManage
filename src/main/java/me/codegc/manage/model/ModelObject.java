@@ -5,42 +5,93 @@ package me.codegc.manage.model;
  */
 public class ModelObject {
 	
-	@Override
-	public String toString() {
-		return "ModelObject [account=" + account + ", password=" + password + ", type_id=" + type_id + "]";
-	}
+
 	private String account;
 	
 	private String password;
 	
-	private byte type_id;
+	private String usernName;
 	
-	public ModelObject(String account, String password, byte type_id) {
+	private String phoneNumber;
+	
+	private String picURL;
+	
+	
+	private byte typeID;
+
+	
+	
+	public ModelObject(String account, String password, String usernName, String phoneNumber, String picURL,
+			byte typeID) {
 		super();
 		this.account = account;
 		this.password = password;
-		this.type_id = type_id;
+		this.usernName = usernName;
+		this.phoneNumber = phoneNumber;
+		this.picURL = picURL;
+		this.typeID = typeID;
 	}
-	
-	
+
 
 	public String getAccount() {
 		return account;
 	}
+
+
 	public void setAccount(String account) {
 		this.account = account;
 	}
+
+
 	public String getPassword() {
 		return password;
 	}
+
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public byte getType_id() {
-		return type_id;
+
+
+	public String getUsernName() {
+		return usernName;
 	}
-	public void setType_id(byte type_id) {
-		this.type_id = type_id;
+
+
+	public void setUsernName(String usernName) {
+		this.usernName = usernName;
 	}
+
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+
+	public String getPicURL() {
+		return picURL;
+	}
+
+
+	public void setPicURL(String picURL) {
+		this.picURL = picURL;
+	}
+
+
+	public byte getTypeID() {
+		return typeID;
+	}
+
+
+	public void setTypeID(byte typeID) {
+		this.typeID = typeID;
+	}
+	
+	
 	
 }

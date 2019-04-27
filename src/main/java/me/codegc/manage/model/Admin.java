@@ -7,8 +7,11 @@ package me.codegc.manage.model;
 
 public class Admin extends ModelObject {
 
-	public Admin(String account, String password, byte type_id) {
-		super(account, password, type_id);
+	
+	public Admin(String account, String password, String usernName, String phoneNumber, String picURL, byte typeID) {
+		super(account, password, usernName, phoneNumber, picURL, typeID);
 	}
+
+	
 	
 }

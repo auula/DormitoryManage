@@ -7,33 +7,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-import me.codegc.manage.dao.AdminDao;
-import me.codegc.manage.model.Admin;
+import me.codegc.manage.dao.StudentDao;
+import me.codegc.manage.model.Student;
 import me.codegc.manage.utils.JDBCUtil;
 
-
-public class AdminDaoimplement implements AdminDao {
+public class StudentDaoimplement implements StudentDao {
 
 	// 获取conn
 	private Connection conn = JDBCUtil.init(JDBCUtil.CONFIG).getConnection();
-	/**
-	 *	查询所有管理员用户
-	 */
+
 	@Override
-	public List<Admin> findAllAdmin() {
-		
-		String sql = "SELECT * FROM t_user WHERE  typeID = 2";
+	public List<Student> findAllStudent() {
+		//typeid = 0 是学生
+		String sql = "SELECT * FROM t_user WHERE  typeID = 0";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<Admin> lists = new ArrayList<Admin>();
+		List<Student> lists = new ArrayList<Student>();
 		try {
 			ps = conn.prepareStatement(sql);
 			// 执行
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				lists.add(new Admin(
+				lists.add(new Student(
 						rs.getString("account"), 
 						rs.getString("password"),
 						rs.getString("userName"),
@@ -61,16 +56,15 @@ public class AdminDaoimplement implements AdminDao {
 			JDBCUtil.closeConnection(conn);
 		}
 		return null;
+		
 	}
-	/**
-	 * 根据账号查询 用户
-	 */
+
 	@Override
-	public Admin findByAccount(String account) {
-		String sql = "SELECT * FROM t_user WHERE account = ? AND typeID = 2";
+	public Student findByAccount(String account) {
+		String sql = "SELECT * FROM t_user WHERE account = ? AND typeID = 0";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Admin admin = null;
+		Student student = null;
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, account);
@@ -78,7 +72,7 @@ public class AdminDaoimplement implements AdminDao {
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				// 保存数据
-				admin = new Admin(
+				student = new Student(
 						rs.getString("account"), 
 						rs.getString("password"),
 						rs.getString("userName"),
@@ -86,7 +80,7 @@ public class AdminDaoimplement implements AdminDao {
 						rs.getString("picURL"),
 						rs.getByte("typeID")
 						);
-				return admin;
+				return student;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -103,18 +97,15 @@ public class AdminDaoimplement implements AdminDao {
 			}
 			JDBCUtil.closeConnection(conn);
 		}
-		return admin;
+		return student;
 	}
-	
-	/**
-	 * 根据账号和密码查询管理员
-	 */
+
 	@Override
-	public Admin findByAccountAndPassword(String account, String password) {
-		String sql = "SELECT * FROM t_user WHERE account = ? AND password = ? AND typeID = 2";
+	public Student findByAccountAndPassword(String account, String password) {
+		String sql = "SELECT * FROM t_user WHERE account = ? AND password = ? AND typeID = 0";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Admin admin = null;
+		Student student = null;
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, account);
@@ -123,7 +114,7 @@ public class AdminDaoimplement implements AdminDao {
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				// 保存数据
-				admin = new Admin(
+				student = new Student(
 						rs.getString("account"), 
 						rs.getString("password"),
 						rs.getString("userName"),
@@ -131,7 +122,7 @@ public class AdminDaoimplement implements AdminDao {
 						rs.getString("picURL"),
 						rs.getByte("typeID")
 						);
-				return admin;
+				return student;
 			}
 		} catch (SQLException e) {
 			
@@ -149,7 +140,7 @@ public class AdminDaoimplement implements AdminDao {
 			}
 			JDBCUtil.closeConnection(conn);
 		}
-		return admin;
+		return student;
 	}
 
 }

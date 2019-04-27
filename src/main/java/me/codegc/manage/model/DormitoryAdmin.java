@@ -5,8 +5,11 @@ package me.codegc.manage.model;
  */
 public class DormitoryAdmin extends ModelObject {
 
-	public DormitoryAdmin(String account, String password, byte type_id) {
-		super(account, password, type_id);
+	public DormitoryAdmin(String account, String password, String usernName, String phoneNumber, String picURL,
+			byte typeID) {
+		super(account, password, usernName, phoneNumber, picURL, typeID);
+		// TODO Auto-generated constructor stub
 	}
 
+	
 }
