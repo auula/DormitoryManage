@@ -1,4 +1,5 @@
 
+<%@page import="me.codegc.manage.enumeration.ActionStatus"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -138,7 +139,7 @@
 			login();
 		}
 		function login() {
-			var data = {
+			const data = {
 					account : $('#account').val(),
 					password : $('#password').val(),
 					vcode : $('#vcode').val(),
@@ -146,7 +147,16 @@
 			}
 			console.log(data)
 			$.post("<%=basePath%>login/form", data, function(result) {
-				console.log(result)
+				if(result.status == <%=ActionStatus.LOGIN_SUCCESSFUL.getCode()%>){
+					console.log(result.message);
+					window.location.href='<%=basePath%>system'; 
+				}else{
+					$.message({
+				        message:result.message,
+				        type:'warning',
+				        time:'3000', 
+				    });
+				}
 			});
 		}
 	</script>

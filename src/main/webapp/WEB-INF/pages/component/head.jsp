@@ -61,7 +61,7 @@
 					class="mdui-ripple">身 份: <%=type_id%>
 				</a></li>
 				<li class="mdui-menu-item" disabled><a href="javascript:;">电
-						话: <%=md.getPhoneNumber() %></a></li>
+						 话: <%=md.getPhoneNumber() %></a></li>
 
 				<li class="mdui-divider"></li>
 				<li class="mdui-menu-item"><a href="javascript:;"

@@ -1,15 +1,12 @@
 package com.codegc.manage.api;
 
 import java.io.IOException;
-import java.security.CryptoPrimitive;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.catalina.User;
 
 import me.codegc.manage.enumeration.ActionStatus;
 import me.codegc.manage.enumeration.UserTypeID;
@@ -47,6 +44,16 @@ public class UserLogin extends HttpServlet {
 		String password = request.getParameter("password");
 		String vcode = request.getParameter("vcode");
 		int type_id = Integer.valueOf(request.getParameter("t_id"));
+		
+		// 获取session中的验证码
+        String sessionCode = (String) request.getSession().getAttribute("_captcha");
+        // 判断验证码
+        if (vcode ==null || !sessionCode.equals(vcode)) {
+            JsonUtil.outJson(response, new JsonResult(ActionStatus.V_CODE_ERROR.getCode(), ActionStatus.V_CODE_ERROR.getMessage()));
+            return;
+        }
+		
+		
 		//设置超时为30分钟 1800000ms
 		session.setMaxInactiveInterval(1000*60*30);
 		switch (type_id) {
@@ -66,9 +73,8 @@ public class UserLogin extends HttpServlet {
 		case 1:
 			if (type_id == 1) {
 				session.setAttribute("TYPE_ID", UserTypeID.DORM_MANNAGE.getTypeid());
-				session.setAttribute("IS_LOGIN", true);
-				JsonUtil.outJson(response, new JsonResult(ActionStatus.LOGIN_SUCCESSFUL.getCode(),
-						ActionStatus.LOGIN_SUCCESSFUL.getMessage()));
+				session.setAttribute("LOGIN_ACCOUNT", us.getDormitoryAccountData(account));
+				JsonUtil.outJson(response, new JsonResult(ActionStatus.LOGIN_SUCCESSFUL.getCode(), ActionStatus.LOGIN_SUCCESSFUL.getMessage()));
 			} else {
 				JsonUtil.outJson(response,
 						new JsonResult(ActionStatus.LOGIN_ERROR.getCode(), ActionStatus.LOGIN_ERROR.getMessage()));

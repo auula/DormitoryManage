@@ -18,7 +18,7 @@
 			break;
 		case 1:
 		%>
-			<jsp:include page="${'../component/footer.jsp' }"></jsp:include>
+			<jsp:include page="${'./dorm-drawer.jsp' }"></jsp:include>
 		<%
 			break;
 		case 2:
