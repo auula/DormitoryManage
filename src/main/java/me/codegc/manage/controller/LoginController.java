@@ -12,21 +12,29 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * Default constructor. 
-     */
-    public LoginController() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public LoginController() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/**
-		 * /WEB-INF/pages/login.jsp 这个不能直接被访问的 需要通过转发访问的
-		 */
-		request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String action = request.getParameter("action");
+		if ((action != null)&&"pwdReset".equals(action)) {
+			request.getRequestDispatcher("/WEB-INF/pages/pwdReset.jsp").forward(request, response);
+		} else {
+			/**
+			 * /WEB-INF/pages/login.jsp 这个不能直接被访问的 需要通过转发访问的
+			 */
+			request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);		
+		}
+
 	}
 
 }

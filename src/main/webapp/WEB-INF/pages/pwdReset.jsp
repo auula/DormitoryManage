@@ -1,8 +1,6 @@
-
-<%@page import="me.codegc.manage.enumeration.ActionStatus"%>
-<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.util.Date"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -39,19 +37,12 @@
 					<form class="pui-form login-form" method="post">
 						<div class="pui-form-group">
 							<h1 class="pui-text-white pui-text-normal">
-								<i class="tb-icon icon-lock icon-2x"></i> 登录 Login
+								<i class="tb-icon icon-lock icon-2x"></i> 重置密码
 							</h1>
 							<div role="username">
 								<input type="text" id="account" maxlength="16"
 									class="pui-unbordered" placeholder="用户名" /> <i
 									class="fa fa-user pui-text-blue"></i>
-							</div>
-						</div>
-						<div class="pui-form-group">
-							<div role="password">
-								<input type="password" id="password" maxlength="16"
-									class="pui-unbordered" placeholder="密码" /> <i
-									class="fa fa-lock pui-text-blue"></i>
 							</div>
 						</div>
 						<div class="pui-form-group">
@@ -64,20 +55,10 @@
 							</div>
 						</div>
 						<div class="pui-form-group">
-							<label style="font-size: 15px" class="type_form">身 份 :</label>
-							<pui-radio name="type_id" value="0" class="checked">学生<input
-								type="radio" name="type_id" value="0" 
-								 ></pui-radio>
-							<pui-radio name="type_id" value="1">宿管<input
-								type="radio" name="type_id" value="1"></pui-radio>
-							<pui-radio name="type_id" value="2">系统管理员<input
-								type="radio" name="type_id" value="2"></pui-radio>
-						</div>
-						<div class="pui-form-group">
 							<input type="button" name="submit" onclick="validation();"
 								class="pui-btn pui-btn-default pui-bg-blue-800 pui-unbordered"
-								value="登录" /> <span><a href="<%=basePath %>?action=pwdReset"
-								class="pui-text-white pui-text-xs">忘记密码？</a></span>
+								value="登录" /> <span><a href="<%=basePath%>login"
+								class="pui-text-white pui-text-xs">去登录.</a></span>
 						</div>
 					</form>
 				</div>
@@ -87,9 +68,9 @@
 			class="pui-layout pui-layout-fixed pui-layout-fixed-1200 login-footer">
 			<div class="copyright">
 				<p>
-					Copyright &copy; <%=(new Date().getYear()+1900)%> <a href="https://github.com/pandao/planeui"
-						class="pui-link" title="Plane UI" target="_blank">DingShuo</a> All
-					Rights Reserved.
+					Copyright &copy; <%=(new Date().getYear()+1900)%>
+					<a href="https://github.com/pandao/planeui" class="pui-link"
+						title="Plane UI" target="_blank">DingShuo</a> All Rights Reserved.
 				</p>
 				<p>
 					<small class="pui-right">代码如诗。</small>
@@ -121,9 +102,9 @@
 		
 		/* 登录验证 */
 		function validation() {
-			if($('#password').val() == "" || $('#account').val() == ""){
+			if($($('#account').val() == "")){
 				$.message({
-			        message:'账号或者密码不能为空！',
+			        message:'账号不能为空！',
 			        type:'warning',
 			        time:'3000', 
 			    });
@@ -142,13 +123,11 @@
 		function login() {
 			const data = {
 					account : $('#account').val(),
-					password : $('#password').val(),
 					vcode : $('#vcode').val(),
-					t_id: $("input[type='radio']:checked").val()
 			}
 			console.log(data)
-			$.post("<%=basePath%>login/form", data, function(result) {
-				if(result.status == <%=ActionStatus.LOGIN_SUCCESSFUL.getCode()%>){
+			$.post("<%=basePath%>login/reset", data, function(result) {
+				if(result.status == 1001){
 					console.log(result.message);
 					window.location.href='<%=basePath%>system'; 
 				}else{
